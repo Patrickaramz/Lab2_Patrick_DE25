@@ -1,4 +1,5 @@
 class Shape:
+
     # Skapar figurens centrumkoordinater
     def __init__(self, x=0, y=0):
         # Kollar så att x och y är ett tal (int eller float)
