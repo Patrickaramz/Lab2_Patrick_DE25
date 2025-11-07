@@ -89,30 +89,3 @@ class Circle(Shape):
         return f"Circle with center at ({self._x}, {self._y}) and radius {self._radius}"
     
 
-    # Ritar cirkeln med matplotlib
-    def draw(self):
-        """Ritar cirkeln med matplotlib"""
-        fig, ax = plt.subplots()
-        
-        # Skapa och rita cirkeln
-        circle = plt.Circle((self._x, self._y), self._radius, fill=False, 
-                           edgecolor='blue', linewidth=2)
-        ax.add_patch(circle)
-        
-        # Rita centrum som en punkt
-        ax.plot(self._x, self._y, 'bo', markersize=8)
-        
-        # Grundinställningar
-        ax.set_aspect('equal')
-        ax.grid(True, alpha=0.3)
-        
-        # Sätt gränser baserat på cirkelns storlek
-        margin = self._radius * 0.5
-        ax.set_xlim(self._x - self._radius - margin, self._x + self._radius + margin)
-        ax.set_ylim(self._y - self._radius - margin, self._y + self._radius + margin)
-        
-        ax.set_xlabel('X-axis')
-        ax.set_ylabel('Y-axis')
-        ax.set_title(f'Circle with radius {self._radius}')
-        
-        plt.show()
