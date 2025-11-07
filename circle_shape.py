@@ -1,6 +1,7 @@
 # Importerar matte-funktioner och basklassen Shape
 import math
 from shape import Shape
+import matplotlib.pyplot as plt
 
 
 # Skapar en klass som heter Circle och ärver från Shape
@@ -16,26 +17,102 @@ class Circle(Shape):
         
         # Kollar så radius inte är 0 eller negativt
         if radius <= 0:
-            raise TypeError("radius must be a positive number")
+            raise ValueError("radius must be a positive number")
         
         self._radius = radius
 
 
     @property
     def radius(self):
-        # Returnerar cirkelns radie
         return self._radius
+
 
     # Beräknar area
     @property
     def area(self):
         return math.pi * self._radius ** 2
     
-  # Veräknar omkrets
+
+    # Beräknar omkrets
     @property
     def perimeter(self):
         return 2 * math.pi * self._radius
     
+
     # Kollar om cirkeln är en enhetscirkel
     def is_unit_circle(self):
         return self._radius == 1 and self._x == 0 and self._y == 0
+
+
+    # Jämför två cirklar baserat på radien (lika med)
+    def __eq__(self, other):
+        if not isinstance(other, Circle):
+            return False
+        return self._radius == other._radius
+    
+
+    # Mindre än
+    def __lt__(self, other):
+        if not isinstance(other, Circle):
+            return False
+        return self._radius < other._radius
+    
+
+    # Större än
+    def __gt__(self, other):
+        if not isinstance(other, Circle):
+            return False
+        return self._radius > other._radius
+    
+
+    # Mindre än eller lika med
+    def __le__(self, other):
+        if not isinstance(other, Circle):
+            return False
+        return self._radius <= other._radius
+    
+
+    # Större än eller lika med
+    def __ge__(self, other):
+        if not isinstance(other, Circle):
+            return False
+        return self._radius >= other._radius
+
+
+    # Returnerar representation för debuggning
+    def __repr__(self):
+        return f"Circle(x={self._x}, y={self._y}, radius={self._radius})"
+    
+
+    # Returnerar användarvänlig beskrivning
+    def __str__(self):
+        return f"Circle with center at ({self._x}, {self._y}) and radius {self._radius}"
+    
+
+    # Ritar cirkeln med matplotlib
+    def draw(self):
+        """Ritar cirkeln med matplotlib"""
+        fig, ax = plt.subplots()
+        
+        # Skapa och rita cirkeln
+        circle = plt.Circle((self._x, self._y), self._radius, fill=False, 
+                           edgecolor='blue', linewidth=2)
+        ax.add_patch(circle)
+        
+        # Rita centrum som en punkt
+        ax.plot(self._x, self._y, 'bo', markersize=8)
+        
+        # Grundinställningar
+        ax.set_aspect('equal')
+        ax.grid(True, alpha=0.3)
+        
+        # Sätt gränser baserat på cirkelns storlek
+        margin = self._radius * 0.5
+        ax.set_xlim(self._x - self._radius - margin, self._x + self._radius + margin)
+        ax.set_ylim(self._y - self._radius - margin, self._y + self._radius + margin)
+        
+        ax.set_xlabel('X-axis')
+        ax.set_ylabel('Y-axis')
+        ax.set_title(f'Circle with radius {self._radius}')
+        
+        plt.show()
