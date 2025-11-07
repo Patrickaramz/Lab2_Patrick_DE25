@@ -70,4 +70,20 @@ class Rectangle(Shape):
         if not isinstance(other, Rectangle):
             return False
         return self.area > other.area
-        
+    
+
+    # Returnerar True om self.area är större eller lika med other.area
+    def __ge__(self, other):
+        if not isinstance(other, Rectangle):
+            return False
+        return self.area >= other.area
+    
+
+    # Rturnerar representation för debuggning
+    def __repr__(self):
+        return f"Rectangle(x={self._x}, y={self._y}, width={self._width}, height={self._height})"
+    
+    
+    # Returnerar beskrivning till användaren av rektangeln
+    def __str__(self):
+        return f"Rectangle with center at ({self._x}, {self._y}), width={self._width} and height {self._height}"
