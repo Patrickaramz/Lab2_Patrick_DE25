@@ -16,6 +16,23 @@ class Rectangle(Shape):
             raise ValueError("width must be a positive number")
         
 
-        # Kontrollerar att height är et tall
+        # Kontrollerar att height är ett tal
         if not isinstance(height, (int, float)):
             raise TypeError("height must be a number")
+        
+        # Kollar så att height inte är ett negativt tal
+        if height <= 0:
+            raise ValueError("height must be a positive number")
+        
+        self._width = width
+        self._height = height
+
+
+    @property
+    def width(self):
+        return self._width
+    
+
+    @property
+    def height(self:)
+        return self._height
