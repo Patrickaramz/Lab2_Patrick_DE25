@@ -32,7 +32,42 @@ class Rectangle(Shape):
     def width(self):
         return self._width
     
-
+    
     @property
-    def height(self:)
+    def height(self):
         return self._height
+    
+    # Räknar ut arean
+    @property
+    def area(self):
+        return self._width + self._height
+    
+    # Räknar ut omkretsen
+    @property
+    def perimeter(self):
+        return 2 * (self._width + self._height)
+    
+    # Kontrollerar att rekangeln är en kvadrat
+
+    def is_square(self):
+        return self._width == self._height
+    
+    # Jämför två rekantgöar baserat på arean
+    def __eq__(self, other):
+        if not isinstance(other, Rectangle):
+            return False
+        return self.area == other.area
+    
+
+    # Returnerar True om self.area är mindre än other area
+    def __lt__(self, other):
+        if not isinstance(other, Rectangle):
+            return False
+        return self.area < other.area
+    
+    # Returnerar True om self.area är större än other.area
+    def __gt__(self, other):
+        if not isinstance(other, Rectangle):
+            return False
+        return self.area > other.area
+        
